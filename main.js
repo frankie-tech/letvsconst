@@ -35,5 +35,5 @@ if ('HTMLDialogElement' in window === false) {
     dialog.setAttribute('open', '');
 } else {
     openDialog.onclick = () => dialog.showModal();
-    closeDialog.onclick = () => dialog.closest();
+    closeDialog.onclick = () => dialog.close();
 }
