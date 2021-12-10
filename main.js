@@ -8,27 +8,27 @@ const z = new Ztextify('[data-splitting]', {
 	direction: 'backwards',
 });
 
-const timeline = anime.timeline({
-    targets: '.z-layers > .z-layer',
-    delay: (el, i) => i * 10,
-    duration: 500,
-    easing: 'easeInOutSine',
-    loop: true,
-    direction: 'alternate',
-});
+if (matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    const timeline = anime.timeline({
+        targets: '.z-layers > .z-layer',
+        delay: (el, i) => i * 10,
+        duration: 500,
+        easing: 'easeInOutSine',
+        loop: true,
+        direction: 'alternate',
+    });
 
-timeline.add({
-    scale: (el, i, total) => {
-        i = ++i;
-        const scaleFactor = (total - i) * 2 / total;
+    timeline.add({
+        scale: (el, i, total) => {
+            i = ++i;
+            const scaleFactor = (total - i) * 2 / total;
 
-        let scale = 1 + (scaleFactor / 3);
-        return scale
-    },
-});
-
-const dialog = document.getElementById('dialogElement'),
-    ;
+            let scale = 1 + (scaleFactor / 3);
+            return scale
+        },
+    });
+}
+const dialog = document.getElementById('dialogElement');
 
 if ('HTMLDialogElement' in window === false) {
     document.documentElement.classList.add('dialog-unsupported');
