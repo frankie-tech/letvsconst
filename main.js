@@ -27,9 +27,13 @@ timeline.add({
     },
 });
 
-const dialog = document.getElementById('dialogElement');
+const dialog = document.getElementById('dialogElement'),
+    ;
 
 if ('HTMLDialogElement' in window === false) {
     document.documentElement.classList.add('dialog-unsupported');
     dialog.setAttribute('open', '');
+} else {
+    openDialog.onclick = () => dialog.showModal();
+    closeDialog.onclick = () => dialog.closest();
 }
