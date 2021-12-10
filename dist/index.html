@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://fav.farm/👾" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>let vs const</title>
+    <meta name="description" content="The title match of the millenia">
+    
+    <script type="module" crossorigin src="/assets/index.beb0cff8.js"></script>
+    <link rel="modulepreload" href="/assets/vendor.f782cf36.js">
+    <link rel="stylesheet" href="/assets/index.8893f3fe.css">
+  </head>
+  <body>
+    <h1>It's time to settle the debate once and for all!</h1>
+    <span data-splitting class="h1">JUST USE VAR</span>
+    <div class="text-center">
+      <button id="openDialog" class="btn btn-open">Why?</button>
+    </div>
+    <dialog id="dialogElement" class="dialog">
+      <div class="text-right">
+        <button id="closeDialog" class="btn btn-close"><span class="visually-hidden">Close</span><span>&times;</span></button>
+      </div>
+      <div>
+        <h2>The day's of arguing over wether it is best to use <code>let</code> or <code>const</code> are over!</h2>
+        <p>"But why? It's so fun arguing about it!" you might be saying to yourself.</p>
+        <p>Well you're wrong, it isn't. It's drawn out, boring, and we don't need to do it anymore.</p>
+        <p>Instead, here's some resources to make the decision for you: </p>
+        <ul>
+          <li><a href="https://github.com/airbnb/javascript#variables">Airbnb Style Guide#Variables</a></li>
+          <li><a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/explore-differences-between-the-var-and-let-keywords">FreeCodeCamp: Explore differences between the <code>var</code> and <code>let</code> keywords</a></li>
+          <li><a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/declare-a-read-only-variable-with-the-const-keyword">FreeCodeCamp: Declare a read only variable with the <code>const</code> keyword</a></li>
+          <li><a href="https://overreacted.io/on-let-vs-const/">Dan Abramov: On <code>let</code> vs. <code>const</code></a></li>
+          <li><a href="https://caniuse.com/let">Can I Use: <code>let</code></a></li>
+          <li><a href="https://caniuse.com/const">Can I Use: <code>const</code></a></li>
+          <li><a href="https://mariusschulz.com/blog/constant-variables-in-javascript-or-when-const-isnt-constant">Constant variables in Javascript, or: When <code>const</code> isn't a constant.</a></li>
+        </ul>
+        <p class="ending-statement">With the passing of IE, RIP, the arguments over <code>var</code> vs. <code>let</code> vs. <code>const</code> are surely going to die down. ES6 has become a standard, and with the help of bundlers and transpilers, like Babel, Webpack, Vite, etc, the choice is usually an afterthought for more seasoned developers.</p>
+        <details>
+          <summary>"But how would you do constants if you only had <code>var</code> to work with?</summary>
+          <h2>SO GLAD YOU ASKED!! HERE YOU GO!!</h2>
+          <pre><code>Object.definePropery(window, '__constants_', {
+    configurable: false,
+    writable: false,
+    enumerable: false,
+    value: function(consts, strict = true) {
+        var __n_o_ = () => false;
+        return new Proxy(consts, {
+            get() {
+                return Reflect.get(...arguments);
+            },
+            getOwnPropertyDescriptor() {
+                return { 
+                  configurable: false, 
+                  writable: false, 
+                  value: Reflect.get(...arguments)
+                };
+            },
+            preventExtensions: (t) => (
+              Object.preventExtensions(t), true
+            ),
+            ownKeys: t => Reflect.ownKeys(t),
+            set: (t,k,v) => !strict && k in t ? 
+              __n_o_() : Reflect.set(t,k,v),
+            deleteProperty: __n_o_,
+            defineProperty: __n_o_,
+            setPrototypeOf: __n_o_,
+            isExtensible: __n_o_,
+        }
+      );
+    }
+  });</code></pre>
+          <ol>
+            <li>Create a <code>__constants_</code> function that cannot be overwritten on the <code>window</code> object.</li>
+            <li>Optional: <i>You can change the key from <code>__constants_</code> to whatever you like.</i></li>
+            <li>Run <code>__constants_</code> by passing the an object of constants that you don't want to be changed.</li>
+            <li>Optional: <i>Pass in <code>true</code> as a second argument to make it impossible to add new values to the created constants object.</i></li>
+          </ol>
+          <h4>"But what about this edge case?"</h4>
+          <p>I don't want to hear it.</p>
+        </details>
+      </div>
+    </dialog>
+    <!--
+    Object.defineProperty
+    https://stackoverflow.com/a/4637056/15345333
+
+    Object.freeze
+    https://stackoverflow.com/a/23462960/15345333
+
+    Naming Conventions
+    https://stackoverflow.com/a/130399/15345333
+
+    IIFE (or Proxy)
+    https://stackoverflow.com/a/131286/15345333
+    -->
+    
+  </body>
+</html>
