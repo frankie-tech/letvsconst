@@ -1,0 +1,158 @@
+@use "sass:map";
+@import "https://unpkg.com/open-props";
+
+$colors: (1: 'red', 10: 'pink', 8: 'grape', 9: 'violet', 7: 'indigo', 6: 'blue', 5: 'cyan', 3: 'teal', 4: 'green', 2: 'lime');
+
+/* b612-mono-700 - latin */
+@font-face {
+  font-family: 'B612 Mono';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  src: local(''), url('./fonts/b612-mono-v5-latin-700.woff2') format('woff2');
+}
+
+:root {
+  font-family: var(--font-sans);
+}
+
+body {
+  padding: 2.5vmin 5vmax;
+	min-height: 100vh;
+	display: grid;
+  gap: 2rem;
+	place-content: center;
+	background-color: var(--indigo-0);
+}
+
+h1, h2, .h1 {
+	font-family: 'B612 Mono', monospace;
+}
+
+h1 {
+  max-width: min(100vw, 768px);
+}
+
+h1, .h1 {
+	font-size: var(--size-fluid-3);
+  text-align: center;
+}
+
+h2 {
+  font-size: var(--size-fluid-2);
+}
+
+@media (min-width: 576px) {
+  h1, .h1 {
+    font-size: var(--size-fluid-4);
+  }
+  h2 {
+    font-size: var(--size-fluid-3);
+  }
+}
+
+@media (min-width: 768px) {
+  .h1 {
+    font-size: var(--size-fluid-5);
+  }
+
+  h2 {
+    font-size: var(--size-4);
+  }
+}
+
+code {
+  display: inline-block;
+  padding: 0.1ch 0.25ch;
+  background-color: var(--gray-0);
+}
+
+.dialog-unsupported {
+  dialog {
+    position: relative;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+dialog {
+  background-color: white;
+  padding: 1rem;
+  max-width: clamp(300px, 90vw, 768px);
+  border: 3px solid var(--gray-9);
+  > div > * {
+    margin: 0;
+  }
+  > div > * + * {
+    margin-top: 1ch;
+  }
+
+  ul {
+    display: grid;
+    gap: 1ch;
+    padding-left: 0;
+  }
+  ul > li {
+    display: inline-block;
+  }
+  ul > li + li {
+    margin-top: 0.5ch;
+  }
+  pre {
+    tab-size: 2;
+    code {
+      padding: 1ch 2ch;
+      max-width: calc(100% - 4ch);
+      display: block;
+    }
+  }
+}
+
+.ending-statement {
+  font-weight: bold;
+}
+.z-layer {
+  --rotate-start: 15deg;
+}
+
+@for $layer from 1 to 10 {
+	.z-layer:nth-child(n + #{$layer}) {
+		--zt-index: #{$layer};
+		color: var(--#{map.get($colors, $layer)}-6);
+    transform: rotate(var(--rotate-start));
+	}
+}
+
+.z-layer {
+  --zty-translate-start: 0.65em;
+  --zty-translate-end: -0.65em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.btn {
+  background: transparent;
+  font-size: var(--size-fluid-3);
+  font-weight: 700;
+  text-transform: lowercase;
+  text-decoration: underline;
+  padding: var(--size-fluid-1) var(--size-fluid-4);
+  border: unset;
+}
+
+.btn-open {
+  border: 3px dashed var(--gray-7);
+  color: var(--gray-9);
+}
+
+dialog > :is(h2, h3, h4, h5) {
+  font-family: var(--font-serif);
+}
