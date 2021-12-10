@@ -1,6 +1,5 @@
 import Ztextify from './ztext.js';
 import anime from 'animejs';
-import dialogPolyfill from 'dialog-polyfill';
 
 const z = new Ztextify('[data-splitting]', {
     depth: '2em',
@@ -28,21 +27,6 @@ timeline.add({
     },
 });
 
-/*
-const open = document.getElementById('openDialog'),
-    close = document.getElementById('closeDialog'),
-    
-    dialogPolyfill.registerDialog(dialog);
-    
-    open.addEventListener('click', () => {
-        dialog.showModal()
-        timeline.pause();
-    });
-    close.addEventListener('click', () => {
-        dialog.close()
-        timeline.play();
-    });*/
-    
 const dialog = document.getElementById('dialogElement');
 
 if ('HTMLDialogElement' in window === false) {
