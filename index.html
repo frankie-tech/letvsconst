@@ -38,7 +38,7 @@
         <details>
           <summary>"But how would you do constants if you only had <code>var</code> to work with?</summary>
           <h2>SO GLAD YOU ASKED!! HERE YOU GO!!</h2>
-          <pre><code>Object.definePropery(window, '__constants_', {
+          <pre><code>Object.defineProperty(window, '__constants_', {
     configurable: false,
     writable: false,
     enumerable: false,
